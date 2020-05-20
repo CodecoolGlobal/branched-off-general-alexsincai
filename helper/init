@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+for file in scripts/*; do
+    ./helper/delete_branch ${file#scripts/}
+done
+
+touch .marker
+git add .marker
+git commit -m 'RESET-MARKER'
+
+for file in scripts/*; do 
+    ./helper/create_branch ${file#scripts/}
+    git checkout master
+done

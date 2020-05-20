@@ -1,14 +1,63 @@
 #!/usr/bin/env bash
 
-for file in scripts/*; do
-    ./helper/delete_branch ${file#scripts/}
-done
+git checkout master
+git push --delete demo
+git branch -D demo
+
+git checkout master
+git push --delete merge-conflict
+git branch -D merge-conflict
+
+git checkout master
+git push --delete merge-simple
+git branch -D merge-simple
+
+git checkout master
+git push --delete merge-undo-last
+git branch -D merge-undo-last
+
+git checkout master
+git push --delete rebase-branch
+git branch -D rebase-branch
+
+git checkout master
+git push --delete rename-commit
+git branch -D rename-commit
+
+git checkout master
+git push --delete undo-last
+git branch -D undo-last
+
+git checkout master
+git push --delete undo-last-but-one
+git branch -D undo-last-but-one
 
 touch .marker
 git add .marker
 git commit -m 'RESET-MARKER'
 
-for file in scripts/*; do 
-    ./helper/create_branch ${file#scripts/}
-    git checkout master
-done
+git checkout -b demo
+git push --set-upstream origin demo
+
+git checkout -b merge-conflict
+git push --set-upstream origin merge-conflict
+
+git checkout -b merge-simple
+git push --set-upstream origin merge-simple
+
+git checkout -b merge-undo-last
+git push --set-upstream origin merge-undo-last
+
+git checkout -b rebase-branch
+git push --set-upstream origin rebase-branch
+
+git checkout -b rename-commit
+git push --set-upstream origin rename-commit
+
+git checkout -b undo-last
+git push --set-upstream origin undo-last
+
+git checkout -b undo-last-but-one
+git push --set-upstream origin undo-last-but-one
+
+git checkout master
